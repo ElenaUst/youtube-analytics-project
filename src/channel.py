@@ -39,4 +39,45 @@ class Channel:
         """
         data = self.__dict__
         with open(filename, 'w', encoding='utf-8') as f:
-            f.write(json.dumps(data, ensure_ascii=False))
+            json.dump(data, f, ensure_ascii=False, indent=4)
+
+    def __str__(self):
+        """
+        Возвращает название и ссылку на канал по шаблону `<название_канала> (<ссылка_на_канал>)`
+        """
+        return f'{self.title} ({self.url})'
+
+    def __add__(self, other):
+        if isinstance(other, Channel):
+            sum_subscriberCount = int(self.subscriberCount) + int(other.subscriberCount)
+            return sum_subscriberCount
+
+    def __sub__(self, other):
+        if isinstance(other, Channel):
+            return int(self.subscriberCount) - int(other.subscriberCount)
+
+
+    def __gt__(self, other):
+        if self.subscriberCount > other.subscriberCount:
+            return True
+        return False
+
+    def __ge__(self, other):
+        if self.subscriberCount >= other.subscriberCount:
+            return True
+        return False
+
+    def __lt__(self, other):
+        if self.subscriberCount < other.subscriberCount:
+            return True
+        return False
+
+    def __le__(self, other):
+        if self.subscriberCount <= other.subscriberCount:
+            return True
+        return False
+
+    def __eq__(self, other):
+        if self.subscriberCount == other.subscriberCount:
+            return True
+        return False
