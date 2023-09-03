@@ -49,18 +49,21 @@ class Channel:
 
     def __add__(self, other):
         if isinstance(other, Channel):
-            sum_subscriberCount = int(self.subscriberCount) + int(other.subscriberCount)
-            return sum_subscriberCount
+            return int(self.subscriberCount) + int(other.subscriberCount)
+        else:
+            raise TypeError
 
     def __sub__(self, other):
         if isinstance(other, Channel):
             return int(self.subscriberCount) - int(other.subscriberCount)
-
+        else:
+            raise TypeError
 
     def __gt__(self, other):
         if self.subscriberCount > other.subscriberCount:
             return True
         return False
+
 
     def __ge__(self, other):
         if self.subscriberCount >= other.subscriberCount:
